@@ -1,0 +1,1 @@
+VaultPilot is a read-only MCP server that helps AI assistants analyze Destiny 2 inventories, vaults, quests, currencies, triumphs, and weekly priorities using the official Bungie.net API.
