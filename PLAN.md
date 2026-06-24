@@ -174,8 +174,9 @@ vaultpilot/
    needed JSON component tables to keep the install light.
 3. **Single-user vs multi-user** — plan assumes one signed-in user. Multi-account
    support would change the token store and tool signatures; defer unless needed.
-4. **Transport** — stdio for local desktop assistants (default). HTTP/SSE only if a
-   hosted deployment is required later.
+4. **Transport** — **Decided: local stdio.** Targets local desktop MCP clients and
+   makes OAuth simple via a loopback redirect. Code stays transport-agnostic so
+   HTTP/SSE can be added later if a hosted deployment is ever needed.
 
 ## 8. Immediate next step
 
