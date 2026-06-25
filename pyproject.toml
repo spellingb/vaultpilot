@@ -19,6 +19,7 @@ dev = [
 
 [project.scripts]
 vaultpilot = "vaultpilot.server:main"
+vaultpilot-authorize = "vaultpilot.authorize:main"
 
 [build-system]
 requires = ["hatchling"]

@@ -228,13 +228,16 @@ Surface them in the envelope's `warnings`/error channel; never leak raw tokens.
 - Handler contract tests (mirrors the TS branch's Phase 1-2).
 - **Done when:** every tool returns a well-shaped mock envelope and tests pass.
 
-### M2 — Bungie OAuth2
+### M2 — Bungie OAuth2 ✅ *(done)*
 - Register a Confidential app on Bungie.net (read **+** move/equip scopes); capture
   key/id/secret/redirect.
 - Authorization-code flow: build authorize URL, run a tiny local redirect handler to
-  capture `code`, exchange for tokens.
+  capture `code`, exchange for tokens. Implemented in `auth/` (`oauth`, `callback`,
+  `token_store`, `manager`) + a `vaultpilot.authorize` CLI (manual-paste or `--serve`).
 - Token store with automatic refresh-on-expiry; handle the 90-day/1-year limits.
 - **Done when:** server holds a valid access token and refreshes transparently.
+  *Verified by fixture-based unit tests (no network); live token mint runs on the
+  user's machine via the CLI.*
 
 ### M3 — Manifest pipeline
 - `GetDestinyManifest` → download chosen definition tables → cache on disk with

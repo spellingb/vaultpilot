@@ -9,8 +9,10 @@ See [PLAN.md](PLAN.md) for the full design and milestones.
 
 ## Status
 
-**M0 + M1 complete (mock-first).** The full MCP tool surface is wired against mocked
-services and runs over stdio. Real Bungie OAuth2 + live data integration is M2+.
+**M0 + M1 complete (mock-first):** the full MCP tool surface runs over stdio against
+mocked services. **M2 complete (OAuth2):** authorize-URL builder, code→token
+exchange, transparent refresh, and a file token store — all unit-tested against
+fixtures. Wiring the live token into the read/write tools is M4.
 
 ## Quick start (development)
 
@@ -26,10 +28,22 @@ pytest
 python -m vaultpilot.server
 ```
 
-To use real Bungie data later (M2+), copy `.env.example` to `.env` and fill in your
-credentials from a [registered Bungie app](https://www.bungie.net/developer). The app
-must have **both** the "Read your Destiny 2 information" and "Move or equip Destiny
-gear" scopes enabled.
+### Authorizing against Bungie (run on your own machine)
+
+Copy `.env.example` to `.env` and fill in your credentials from a
+[registered Bungie app](https://www.bungie.net/developer). The app must have **both**
+the "Read your Destiny 2 information" and "Move or equip Destiny gear" scopes enabled.
+Then mint a token:
+
+```bash
+python -m vaultpilot.authorize        # opens the Bungie consent URL; paste the
+                                      # redirected localhost URL back when prompted
+```
+
+This saves tokens to `TOKEN_STORE_PATH` (default `.tokens.json`, gitignored) and
+refreshes them transparently. The OAuth flow must run on your machine — it needs your
+browser and the `localhost` redirect. (Use `--serve` with a TLS cert if you'd rather
+run the automatic https loopback instead of pasting.)
 
 ## Tools (mock-first)
 
